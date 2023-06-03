@@ -98,33 +98,34 @@ function onDocumentMouseDown(event) {
   }
 }
 
-function handleRem() {
-  if (numArray.length === 0) {
-    alert("Nothing to remove. Try again.");
-    return;
-  }
+// function handleRem() {
+//   if (numArray.length === 0) {
+//     alert("Nothing to remove. Try again.");
+//     return;
+//   }
 
-  const starNum = numArray.pop();
+//   const starNum = numArray.pop();
 
-  // Find the star with the matching value
-  let starToRemove = null;
+//   // Find the star with the matching value
+//   let starToRemove = null;
 
-  scene.traverse(function (object) {
-    if (object.userData !== undefined && object.userData.value === starNum) {
-      starToRemove = object;
-    }
-  });
+//   scene.traverse(function (object) {
+//     let starr = object.userData.star;
+//     if (starr !== undefined && starr.starNum === starNum) {
+//       starToRemove = object;
+//     }
+//   });
 
-  // Remove the star if found
-  if (starToRemove) {
-    scene.remove(starToRemove);
+//   // Remove the star if found
+//   if (starToRemove) {
+//     scene.remove(starToRemove);
    
   
-    console.log("Removal of star with value " + starNum + " success");
-  } else {
-    console.log("Star with value " + starNum + " not found");
-  }
-}
+//     console.log("Removal of star with value " + starNum + " success");
+//   } else {
+//     console.log("Star with value " + starNum + " not found");
+//   }
+// }
 
 function handleSubmit(event) {
   event.preventDefault();
