@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { starDisplay } from './star-display';
 
 const scene = new THREE.Scene();
 
@@ -59,7 +60,8 @@ const numArray = [];
 
 
 document.getElementById("submitbtn").addEventListener("click", handleSubmit);
-document.getElementById("removeRec").addEventListener("click", handleRem);
+// document.getElementById("removeRec").addEventListener("click", handleRem);
+//on hold until remove rem is difin
 
 // holy motherrrrrrrrr this code was so harddddduhhhhh
 document.addEventListener('mousedown', onDocumentMouseDown, false);
@@ -142,7 +144,7 @@ function handleSubmit(event) {
   }
 
   var userStar = new Star(objective, objectiveInfo, objectiveNum);
-  numArray.push(objectiveNum);
+  numArray.push(userStar);
 
   // objectiveInput.value = "";
   // objectiveInfoInput.value = "";
@@ -180,4 +182,6 @@ function animate() {
   requestAnimationFrame( animate );
 }
 
+  //displaycurrent stars rn here
+starDisplay(numArray);
 animate();
