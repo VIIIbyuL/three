@@ -54,25 +54,35 @@ document.getElementById("submitbtn").addEventListener("click", handleSubmit);
 document.getElementById("removeRec").addEventListener("click", handleRem);
 
 function handleRem() {
-  if (numArray == []) {
-    alert("Nothing to remove try again");
+  if (numArray.length === 0) {
+    alert("Nothing to remove. Try again.");
     return;
   }
 
-  let starNum = numArray[numArray.length - 1];
+  const starNum = numArray.pop();
+
+  // Find the star with the matching value
+  let starToRemove = null;
 
   scene.traverse(function (object) {
-    if (object.userData !== undefined) {
-      if (object.userData.value !== undefined) {
-        if(object.userData.value == starNum) {
-          scene.remove(object);
-          console.log("removal of recent star success")
-        }
-      }
+    if (object.userData !== undefined && object.userData.value === starNum) {
+      starToRemove = object;
     }
   });
 
+  // Remove the star if found
+  if (starToRemove) {
+    scene.remove(starToRemove);
+    console.log("Removal of star with value " + starNum + " success");
+  } else {
+    console.log("Star with value " + starNum + " not found");
+  }
 }
+
+
+
+
+
 
 function handleSubmit() {
   objective = document.getElementById("obj").value;
@@ -83,6 +93,7 @@ function handleSubmit() {
   numArray.push(objectiveNum);
 
   addStar(userStar);
+
 }
 
 function addStar(userStar) {
@@ -107,8 +118,9 @@ function addStar(userStar) {
 
 
 function animate() {
-  requestAnimationFrame( animate );
+
   renderer.render( scene, camera);
+  requestAnimationFrame( animate );
 }
 
 animate();
