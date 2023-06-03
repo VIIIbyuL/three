@@ -38,25 +38,51 @@ controls.maxDistance = maxDistance;
 
 
 class Star {
-  constructor(objective, objectiveInfo) {
+  constructor(objective, objectiveInfo, objectiveNum) {
     this.objective = objective;
     this.objectiveInfo = objectiveInfo;
+    this.objectiveNum = objectiveNum;
   }
 }
 
 var objective;
 var objectiveInfo;
+var objectiveNum = 0;
+const numArray = [];
 
-document.getElementById("submitbtn").addEventListener("click", handleClick());
+document.getElementById("submitbtn").addEventListener("click", handleSubmit);
+document.getElementById("removeRec").addEventListener("click", handleRem);
 
-function handleClick() {
+function handleRem() {
+  if (numArray == []) {
+    alert("Nothing to remove try again");
+    return;
+  }
+
+  let starNum = numArray[numArray.length - 1];
+
+  scene.traverse(function (object) {
+    if (object.userData !== undefined) {
+      if (object.userData.value !== undefined) {
+        if(object.userData.value == starNum) {
+          scene.remove(object);
+          console.log("removal of recent star success")
+        }
+      }
+    }
+  });
+
+}
+
+function handleSubmit() {
   objective = document.getElementById("obj").value;
   objectiveInfo = document.getElementById("desc").value;
+  objectiveNum += 1
 
-  var userStar = new Star(objective, objectiveInfo);
+  var userStar = new Star(objective, objectiveInfo, objectiveNum);
+  numArray.push(objectiveNum);
 
   addStar(userStar);
-
 }
 
 function addStar(userStar) {
@@ -67,21 +93,21 @@ function addStar(userStar) {
     emissiveIntensity: 0.2, // Adjust the intensity as desired
   });
   const star = new THREE.Mesh(geometry, material);
-  star.userData.value = userStar;
+  star.userData.value = userStar.objectiveNum;
 
   const [x, y, z] = Array(3)
     .fill()
     .map(() => THREE.MathUtils.randFloatSpread(100));
 
   star.position.set(x, y, z);
-
+  console.log(`star is ${userStar.objective} and ${star.userData.value}`);
   scene.add(star);
 }
 
+
+
 function animate() {
   requestAnimationFrame( animate );
-
-
   renderer.render( scene, camera);
 }
 
