@@ -7,5 +7,16 @@
 .text {
   position: absolute;
   color: white;
-  background-color: pink;
+  
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  list-style: none;
+}
+
+ul > li {
+  
 }
