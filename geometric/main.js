@@ -9,12 +9,15 @@ const renderer = new THREE.WebGL1Renderer({
   canvas: document.querySelector('#bg'),
 });
 
+const spaceText = new THREE.TextureLoader().load('space.jpg');
+scene.background = spaceText;
+
 
 
 renderer.setPixelRatio( window.devicePixelRatio);
 renderer.setSize( window.innerWidth, window.innerHeight);
 
-camera.position.set(0,0,0);
+camera.position.set(0,0,120);
 
 renderer.render(scene, camera);
 
@@ -100,8 +103,8 @@ function handleSubmit(event) {
   var userStar = new Star(objective, objectiveInfo, objectiveNum);
   numArray.push(objectiveNum);
 
-  objectiveInput.value = "";
-  objectiveInfoInput.value = "";
+  // objectiveInput.value = "";
+  // objectiveInfoInput.value = "";
 
   addStar(userStar);
 }
@@ -118,12 +121,13 @@ function addStar(userStar) {
 
   const [x, y, z] = Array(3)
     .fill()
-    .map(() => THREE.MathUtils.randFloatSpread(50));
+    .map(() => THREE.MathUtils.randFloatSpread(100));
 
   star.position.set(x, y, z);
   console.log(`star is ${userStar.objective} and ${star.userData.value}`);
   scene.add(star);
 }
+
 
 
 
