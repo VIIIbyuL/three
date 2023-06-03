@@ -3,7 +3,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 const scene = new THREE.Scene();
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 const renderer = new THREE.WebGL1Renderer({
   canvas: document.querySelector('#bg'),
@@ -13,17 +13,18 @@ const renderer = new THREE.WebGL1Renderer({
 
 renderer.setPixelRatio( window.devicePixelRatio);
 renderer.setSize( window.innerWidth, window.innerHeight);
-camera.position.setZ(30);
+
+camera.position.set(0,0,0);
 
 renderer.render(scene, camera);
 
-const moontext = new THREE.TextureLoader().load('moon.jpg');
+// const moontext = new THREE.TextureLoader().load('moon.jpg');
 
-const geometry = new THREE.SphereGeometry( 10, 64, 32 ); 
-const material = new THREE.MeshStandardMaterial( { map: moontext} ); 
-const sphere = new THREE.Mesh( geometry, material ); 
+// const geometry = new THREE.SphereGeometry( 10, 64, 32 ); 
+// const material = new THREE.MeshStandardMaterial( { map: moontext} ); 
+// const sphere = new THREE.Mesh( geometry, material ); 
 
-scene.add( sphere );
+// scene.add( sphere );
 
 
 const ambientlight = new THREE.AmbientLight(0xffffff);
@@ -82,25 +83,31 @@ function handleRem() {
   }
 }
 
+function handleSubmit(event) {
+  event.preventDefault();
+  const objectiveInput = document.getElementById("obj");
+  const objectiveInfoInput = document.getElementById("desc");
 
+  const objective = objectiveInput.value;
+  const objectiveInfo = objectiveInfoInput.value;
+  const objectiveNum = numArray.length + 1;
 
-
-
-
-function handleSubmit() {
-  objective = document.getElementById("obj").value;
-  objectiveInfo = document.getElementById("desc").value;
-  objectiveNum += 1
+  if (objective === "" || objectiveInfo === "") {
+    alert("Please enter values for objective and objective info");
+    return;
+  }
 
   var userStar = new Star(objective, objectiveInfo, objectiveNum);
   numArray.push(objectiveNum);
 
-  addStar(userStar);
+  objectiveInput.value = "";
+  objectiveInfoInput.value = "";
 
+  addStar(userStar);
 }
 
 function addStar(userStar) {
-  const geometry = new THREE.SphereGeometry(0.25, 24, 24);
+  const geometry = new THREE.SphereGeometry(1, 24, 24);
   const material = new THREE.MeshStandardMaterial({
     color: 0xffffff,
     emissive: 0xffffff,
@@ -111,7 +118,7 @@ function addStar(userStar) {
 
   const [x, y, z] = Array(3)
     .fill()
-    .map(() => THREE.MathUtils.randFloatSpread(100));
+    .map(() => THREE.MathUtils.randFloatSpread(50));
 
   star.position.set(x, y, z);
   console.log(`star is ${userStar.objective} and ${star.userData.value}`);
