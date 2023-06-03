@@ -54,10 +54,11 @@ function addStar() {
 
 Array(300).fill().forEach(addStar);
 
+let rotationAngle = 0;
 function animate() {
   requestAnimationFrame( animate );
 
-  pointlight.rotation
+  // Update the rotation ang
 
   sphere.rotation.x += 0.0;
   sphere.rotation.y += 0.005;
