@@ -1,10 +1,13 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { starDisplay } from './star-display';
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 
 const scene = new THREE.Scene();
 
-const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
+const loader = new FBXLoader();
+
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 const renderer = new THREE.WebGL1Renderer({
   canvas: document.querySelector('#bg'),
@@ -13,10 +16,20 @@ const renderer = new THREE.WebGL1Renderer({
 const spaceText = new THREE.TextureLoader().load('space.jpg');
 scene.background = spaceText;
 
+const screenWidth = window.innerWidth;
+const canvas = document.querySelector('#bg');
+const formElement = document.getElementById("form");
+const rect = formElement.getBoundingClientRect();
+const width = window.innerWidth - rect.right;
+
+let value = (rect.right - rect.left);
+console.log(`value is ${value}`);
+canvas.style.left = `${value}px`;
+
 
 
 renderer.setPixelRatio( window.devicePixelRatio);
-renderer.setSize( window.innerWidth, window.innerHeight);
+renderer.setSize( width, window.innerHeight);
 
 camera.position.set(0,0,0);
 
@@ -31,8 +44,8 @@ renderer.render(scene, camera);
 // scene.add( sphere );
 
 
-const ambientlight = new THREE.AmbientLight(0xffffff);
-scene.add(ambientlight);
+// const ambientlight = new THREE.AmbientLight(0xffffff);
+// scene.add(ambientlight);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
@@ -59,6 +72,8 @@ var objectiveNum = 0;
 const numArray = [];
 
 
+
+
 document.getElementById("submitbtn").addEventListener("click", handleSubmit);
 // document.getElementById("removeRec").addEventListener("click", handleRem);
 //on hold until remove rem is difin
@@ -72,18 +87,18 @@ function onDocumentMouseDown(event) {
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-  const formElement = document.getElementById("form");
-  const rect = formElement.getBoundingClientRect();
+  // const formElement = document.getElementById("form");
+  // const rect = formElement.getBoundingClientRect();
 
-  // Check if the mouse coordinates intersect with the form element's bounding box
-  if (
-    mouse.x >= rect.left &&
-    mouse.x <= rect.right &&
-    mouse.y >= rect.top &&
-    mouse.y <= rect.bottom
-  ) {
-    return; // Ignore clicks on the form
-  }
+  // // Check if the mouse coordinates intersect with the form element's bounding box
+  // if (
+  //   mouse.x >= rect.left &&
+  //   mouse.x <= rect.right &&
+  //   mouse.y >= rect.top &&
+  //   mouse.y <= rect.bottom
+  // ) {
+  //   return; // Ignore clicks on the form
+  // }
 
   raycaster.setFromCamera(mouse, camera);
 
@@ -146,9 +161,6 @@ function handleSubmit(event) {
   var userStar = new Star(objective, objectiveInfo, objectiveNum);
   numArray.push(userStar);
 
-  // objectiveInput.value = "";
-  // objectiveInfoInput.value = "";
-
   addStar(userStar);
 }
 
@@ -157,9 +169,16 @@ function addStar(userStar) {
   const material = new THREE.MeshStandardMaterial({
     color: 0xffffff,
     emissive: 0xffffff,
-    emissiveIntensity: 0.2, // Adjust the intensity as desired
+    emissiveIntensity: 1, // Adjust the intensity as desired
   });
   const star = new THREE.Mesh(geometry, material);
+  // var star;
+
+  // loader.load('./Star.FBX', function (object) {
+  //   star = object;
+  // });
+
+
   star.userData.star = userStar;
 
   const [x, y, z] = Array(3)
