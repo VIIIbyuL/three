@@ -190,6 +190,7 @@ function addStar(userStar) {
 
 
   scene.add(star);
+  starDisplay(numArray);
 }
 
 
@@ -197,7 +198,6 @@ function addStar(userStar) {
 
 function animate() {
   renderer.render( scene, camera);
-
   requestAnimationFrame( animate );
 }
 
