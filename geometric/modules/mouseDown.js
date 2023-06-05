@@ -1,9 +1,14 @@
 import * as THREE from 'three';
 
 export function onDocumentMouseDown(event, camera, scene, raycaster) {
+    const canvas = document.querySelector('#bg');
+    const formElement = document.getElementById("form");
+    const rect = formElement.getBoundingClientRect();
+    const width = window.innerWidth - rect.right;
     
+    let value = (rect.right - rect.left);
     const mouse = new THREE.Vector2();
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.x = ((event.clientX - rect.left - value) / width) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
     console.log('Star clickeqweqeqwed:');
@@ -14,7 +19,6 @@ export function onDocumentMouseDown(event, camera, scene, raycaster) {
     if (intersects.length > 0) {
     
         const clickedObject = intersects[0].object;
-        onsole.log('Star clicked:');
   
         if (clickedObject instanceof THREE.Mesh && clickedObject.userData.star !== undefined) {
             const starNum = clickedObject.userData.star;

@@ -25,7 +25,6 @@ const rect = formElement.getBoundingClientRect();
 const width = window.innerWidth - rect.right;
 
 let value = (rect.right - rect.left);
-console.log(`value is ${value}`);
 canvas.style.left = `${value}px`;
 
 renderer.setPixelRatio( window.devicePixelRatio);
