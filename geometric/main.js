@@ -4,6 +4,7 @@ import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 import { onDocumentMouseDown } from './modules/mouseDown';
 import { handleSubmit } from './modules/handleSubmit';
 import { resize } from './modules/resize';
+import { backgroundLoader } from './modules/backgroundLoader';
 
 
 const scene = new THREE.Scene();
@@ -12,11 +13,9 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 const renderer = new THREE.WebGL1Renderer({
   canvas: document.querySelector('#bg'),
 });
-const spaceText = new THREE.TextureLoader().load('./images/space.jpg');
-scene.background = spaceText;
 
+backgroundLoader(scene);
 resize(renderer);
-
 
 // can adjust cam pos
 camera.position.set(0,0,0);
@@ -46,7 +45,7 @@ document.addEventListener('mousedown', function(event) {
 
 function animate() {
   renderer.render( scene, camera);
-  resize(renderer);
+  backgroundLoader(scene);
   requestAnimationFrame( animate );
 };
 
