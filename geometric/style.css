@@ -9,6 +9,7 @@
   position: absolute;
   color: white;
   overflow: auto;
+  max-width: 360.453px;
 }
 
 ul {
@@ -27,4 +28,20 @@ ul {
 .text {
   background-color: black;
   height: 100%;
+}
+
+.starContainer {
+  display: flex;
+}
+.starContainer > div {
+  height: auto;
+  text-overflow: ellipsis;
+  scrollbar-width: none; /* Remove default scrollbar (for Firefox) */
+  -ms-overflow-style: none;
+  word-wrap: break-word;
+
+}
+
+.starContainer > div::-webkit-scrollbar {
+  display: none; /* Remove default scrollbar (for WebKit browsers) */
 }
