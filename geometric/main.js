@@ -1,10 +1,10 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 import { onDocumentMouseDown } from './modules/mouseDown';
 import { handleSubmit } from './modules/handleSubmit';
 import { resize } from './modules/resize';
 import { backgroundLoader } from './modules/backgroundLoader';
+import { orbitSet } from './modules/orbitSet';
 
 
 const scene = new THREE.Scene();
@@ -22,13 +22,7 @@ camera.position.set(0,0,0);
 
 renderer.render(scene, camera);
 
-const controls = new OrbitControls(camera, renderer.domElement);
-
-const minDistance = 20;
-const maxDistance = 120;
-
-controls.minDistance = minDistance;
-controls.maxDistance = maxDistance;
+orbitSet(camera, renderer);
 
 var objective;
 var objectiveInfo;
@@ -45,7 +39,6 @@ document.addEventListener('mousedown', function(event) {
 
 function animate() {
   renderer.render( scene, camera);
-  backgroundLoader(scene);
   requestAnimationFrame( animate );
 };
 
