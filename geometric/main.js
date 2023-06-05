@@ -4,7 +4,7 @@ import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 import { onDocumentMouseDown } from './modules/mouseDown';
 import { handleSubmit } from './modules/handleSubmit';
 import { resize } from './modules/resize';
-import { rect } from './modules/resize';
+
 
 const scene = new THREE.Scene();
 const loader = new FBXLoader(); // star model remains unused
