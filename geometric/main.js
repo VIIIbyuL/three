@@ -5,7 +5,7 @@ import { handleSubmit } from './modules/handleSubmit';
 import { resize } from './modules/resize';
 import { backgroundLoader } from './modules/backgroundLoader';
 import { orbitSet } from './modules/orbitSet';
-
+import { camReset } from './modules/camReset';
 
 const scene = new THREE.Scene();
 const loader = new FBXLoader(); // star model remains unused
@@ -17,10 +17,7 @@ const renderer = new THREE.WebGL1Renderer({
 backgroundLoader(scene);
 resize(renderer);
 
-// can adjust cam pos
-camera.position.set(0,0,0);
-
-renderer.render(scene, camera);
+camReset(camera);
 
 orbitSet(camera, renderer);
 
