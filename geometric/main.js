@@ -11,7 +11,6 @@ console.log("why")
 const renderer = new THREE.WebGL1Renderer({
   canvas: document.querySelector('#bg'),
 });
-
 const spaceText = new THREE.TextureLoader().load('./images/space.jpg');
 scene.background = spaceText;
 
@@ -20,13 +19,14 @@ const canvas = document.querySelector('#bg');
 const formElement = document.getElementById("form");
 const rect = formElement.getBoundingClientRect();
 const width = window.innerWidth - rect.right;
-
 let value = (rect.right - rect.left);
 canvas.style.left = `${value}px`;
 
 renderer.setPixelRatio( window.devicePixelRatio);
 renderer.setSize( width, window.innerHeight);
 
+
+// can adjust cam pos
 camera.position.set(0,0,0);
 
 renderer.render(scene, camera);
