@@ -16,9 +16,7 @@ const renderer = new THREE.WebGL1Renderer({
 
 backgroundLoader(scene);
 resize(renderer);
-
 camReset(camera);
-
 orbitSet(camera, renderer);
 
 var objective;
