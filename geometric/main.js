@@ -1,9 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { starDisplay } from './modules/star-display';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
-import { addStar } from './modules/addStar';
-import { Star } from './modules/Star';
 import { onDocumentMouseDown } from './modules/mouseDown';
 import { handleSubmit } from './modules/handleSubmit';
 
