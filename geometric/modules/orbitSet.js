@@ -1,4 +1,4 @@
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 function orbitSet(camera, renderer) {
   const controls = new OrbitControls(camera, renderer.domElement);

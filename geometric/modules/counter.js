@@ -1,7 +1,7 @@
 function setupCounter(element) {
   let counter = 0;
 
-  const countDisplay = document.createElement('span'); // Create a <span> element
+  const countDisplay = document.createElement("span"); // Create a <span> element
   element.appendChild(countDisplay); // Append the <span> element to the main element
 
   const updateCountDisplay = () => {
@@ -13,7 +13,7 @@ function setupCounter(element) {
     updateCountDisplay();
   };
 
-  element.addEventListener('click', () => setCounter(counter + 1));
+  element.addEventListener("click", () => setCounter(counter + 1));
   setCounter(0);
 }
 

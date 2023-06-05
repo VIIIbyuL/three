@@ -39,7 +39,6 @@ ul {
   scrollbar-width: none; /* Remove default scrollbar (for Firefox) */
   -ms-overflow-style: none;
   word-wrap: break-word;
-
 }
 
 .starContainer > div::-webkit-scrollbar {

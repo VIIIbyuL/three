@@ -1,9 +1,9 @@
-import onclick from './onclick';
+import onclick from "./onclick";
 
 function starDisplay(numArray) {
-  const starContainer = document.createElement('ul');
-  starContainer.classList.add('starContainer');
-  const display = document.querySelector('.text');
+  const starContainer = document.createElement("ul");
+  starContainer.classList.add("starContainer");
+  const display = document.querySelector(".text");
   const array = numArray.map((obj) => ({ ...obj }));
 
   display.appendChild(starContainer);
@@ -12,7 +12,7 @@ function starDisplay(numArray) {
     return;
   }
 
-  const star = document.createElement('button');
+  const star = document.createElement("button");
   starContainer.appendChild(star);
   const element = array.pop();
   star.textContent = `Star Number: ${element.objectiveNum}`;

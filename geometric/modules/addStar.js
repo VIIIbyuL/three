@@ -1,5 +1,5 @@
-import * as THREE from 'three';
-import starDisplay from './star-display';
+import * as THREE from "three";
+import starDisplay from "./star-display";
 
 function addStar(userStar, scene, numArray) {
   const geometry = new THREE.SphereGeometry(1, 24, 24);
